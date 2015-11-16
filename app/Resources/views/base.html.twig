@@ -3,11 +3,32 @@
     <head>
         <meta charset="UTF-8" />
         <title>{% block title %}Certification Symfony{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        {% block stylesheets %}
+            {% stylesheets
+            filter='cssrewrite'
+            output='css/compiled/app.css'
+            'css/bootstrap.min.css'
+             %}
+            <link rel="stylesheet" href="{{ asset_url }}" type="text/css"/>
+            {% endstylesheets %}
+        {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        {% block body %}
+            {{ include(':includes:_nav-bar.html.twig') }}
+
+        {% endblock %}
+
+        {% block javascripts %}
+            {% javascripts
+            output='js/compiled/app.js'
+            'js/jquery-2.1.4.min.js'
+            'js/bootstrap.min.js'
+            %}
+            <script src="{{ asset_url }}"></script>
+
+            {% endjavascripts %}
+        {% endblock %}
     </body>
 </html>
