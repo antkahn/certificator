@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Category;
+use AppBundle\Entity\Question;
 use AppBundle\Form\CategoryType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -41,6 +42,34 @@ class CategoryController extends Controller
         }
 
         return $this->render(':category:add.html.twig', ['form' => $form->createView()]);
+    }
+
+    /**
+     * @Route("/categorie/{id}/modifier", name="category_edit")
+     */
+    public function editAction(Request $request, Category $category)
+    {
+        $form = $this->createForm(new CategoryType(), $category);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $em = $this->getDoctrine()->getManager();
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('category_list'));
+        }
+
+        return $this->render(':category:edit.html.twig', ['form' => $form->createView()]);
+    }
+
+    /**
+     * @Route("/categorie/{id}/voir", name="category_show")
+     */
+    public function showAction(Request $request, Category $category)
+    {
+
+        return $this->render(':category:show.html.twig', ['category' => $category, 'questions' => $category->getQuestions()]);
     }
 
     /**

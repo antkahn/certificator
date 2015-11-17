@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="container">
+
+        <a href="{{ path('homepage') }}" class="label label-info">
+            <i class="glyphicon glyphicon-chevron-left"></i>
+            Revenir à la page d'accueil
+        </a>
+        <br>
+        <a href="{{ path('category_list') }}" class="label label-info">
+            <i class="glyphicon glyphicon-chevron-left"></i>
+            Revenir à la liste des catégories
+        </a>
+
+        <h1>{{ category.name }}</h1>
+
+        <a class="alert alert-success col-md-12" href="{{ path('question_add', { 'id' : category.id }) }}">
+            <i class="glyphicon glyphicon-plus"></i>&nbsp;Ajouter une question
+        </a>
+
+        <table class="table-striped table-bordered table table-hover">
+            <thead>
+                <tr>
+                    <th>
+                        Intitulé
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for question in questions %}
+                    <tr>
+                        <td>
+                            {{ question.statement }}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+
+    </div>
+
+{% endblock %}

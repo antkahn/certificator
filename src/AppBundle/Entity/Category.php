@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -25,6 +26,18 @@ class Category
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Question", mappedBy="category")
+     */
+    private $questions;
+
+    public function __construct()
+    {
+        $this->questions = new ArrayCollection();
+    }
 
     public function __toString()
     {
@@ -57,5 +70,34 @@ class Category
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * @param Question $question
+     *
+     * @return Category
+     */
+    public function addQuestion(Question $question)
+    {
+        $this->questions[] = $question;
+        $question->setCategory($this);
+
+        return $this;
+    }
+
+    /**
+     * @param Question $question
+     */
+    public function removeQuestion(Question $question)
+    {
+        $this->questions->removeElement($question);
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getQuestions()
+    {
+        return $this->questions;
     }
 }

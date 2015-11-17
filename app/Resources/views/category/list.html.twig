@@ -21,15 +21,27 @@
                     <thead>
                         <tr>
                             <th>Catégorie</th>
+                            <th>Voir</th>
+                            <th>Modifier</th>
                             <th>Supprimer</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {% for categorie in categories %}
+                        {% for category in categories %}
                         <tr>
-                            <td>{{ categorie }}</td>
+                            <td>{{ category }}</td>
                             <td>
-                                <a class="btn btn-xs btn-danger" href="{{ path('category_remove', {'id' : categorie.id }) }}">
+                                <a class="btn btn-xs btn-success" href="{{ path('category_show', {'id' : category.id }) }}">
+                                    <i class="glyphicon glyphicon-eye-open"></i>
+                                </a>
+                            </td>
+                            <td>
+                                <a class="btn btn-xs btn-primary" href="{{ path('category_edit', {'id' : category.id }) }}">
+                                    <i class="glyphicon glyphicon-wrench"></i>
+                                </a>
+                            </td>
+                            <td>
+                                <a class="btn btn-xs btn-danger" href="{{ path('category_remove', {'id' : category.id }) }}">
                                     <i class="glyphicon glyphicon-remove"></i>
                                 </a>
                             </td>
