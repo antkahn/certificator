@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="container">
+
+        <a href="{{ path('homepage') }}" class="label label-info">
+            <i class="glyphicon glyphicon-chevron-left"></i>
+            Revenir à la page d'accueil
+        </a>
+
+        <h1>Ajouter une catégorie</h1>
+
+        {{ form_start(form) }}
+
+            {{ form_widget(form.name) }}
+
+        <button class="btn btn-info" type="submit">Valider</button>
+        {{ form_end(form) }}
+
+
+    </div>
+
+{% endblock %}

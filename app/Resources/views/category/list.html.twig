@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="container">
+
+        <a href="{{ path('homepage') }}" class="label label-info">
+            <i class="glyphicon glyphicon-chevron-left"></i>
+            Revenir à la page d'accueil
+        </a>
+
+        <h1>Catégories</h1>
+
+        <a href="{{ path('category_add') }}"><i class="glyphicon glyphicon-plus"></i>Ajouter une catégorie</a>
+
+        {% for categorie in categories %}
+
+            {{ categorie.name }}
+
+        {% endfor %}
+
+    </div>
+
+{% endblock %}

@@ -15,8 +15,8 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
+    {{ include(':includes:_nav-bar.html.twig') }}
         {% block body %}
-            {{ include(':includes:_nav-bar.html.twig') }}
 
         {% endblock %}
 
