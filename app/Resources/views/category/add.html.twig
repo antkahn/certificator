@@ -1,4 +1,5 @@
 {% extends 'base.html.twig' %}
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
 
 {% block body %}
 
@@ -13,7 +14,7 @@
 
         {{ form_start(form) }}
 
-            {{ form_widget(form.name) }}
+            {{ form_row(form.name) }}
 
         <button class="btn btn-info" type="submit">Valider</button>
         {{ form_end(form) }}

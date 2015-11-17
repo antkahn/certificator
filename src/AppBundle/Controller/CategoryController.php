@@ -42,4 +42,17 @@ class CategoryController extends Controller
 
         return $this->render(':category:add.html.twig', ['form' => $form->createView()]);
     }
+
+    /**
+     * @Route("/categorie/{id}/supprimer", name="category_remove")
+     */
+    public function removeAction(Request $request, Category $category)
+    {
+        $em = $this->getDoctrine()->getEntityManager();
+
+        $em->remove($category);
+        $em->flush();
+
+        return $this->redirect($this->generateUrl('category_list'));
+    }
 }

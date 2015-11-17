@@ -12,7 +12,7 @@ class CategoryType extends AbstractType
     {
         $builder
             ->add('name', 'text', array(
-                'label' => 'Catégorie'
+                'label' => 'Nom de la catégorie'
             ));
     }
 

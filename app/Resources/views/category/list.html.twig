@@ -2,23 +2,45 @@
 
 {% block body %}
 
-    <div class="container">
+    <main class="main" role="main">
+        <div class="container">
 
-        <a href="{{ path('homepage') }}" class="label label-info">
-            <i class="glyphicon glyphicon-chevron-left"></i>
-            Revenir à la page d'accueil
-        </a>
+            <a href="{{ path('homepage') }}" class="label label-info">
+                <i class="glyphicon glyphicon-chevron-left"></i>
+                Revenir à la page d'accueil
+            </a>
 
-        <h1>Catégories</h1>
+            <h1>Catégories</h1>
 
-        <a href="{{ path('category_add') }}"><i class="glyphicon glyphicon-plus"></i>Ajouter une catégorie</a>
+            <div class="row">
+                <a class="alert alert-info col-md-12" href="{{ path('category_add') }}">
+                    <i class="glyphicon glyphicon-plus"></i>&nbsp;Ajouter une catégorie
+                </a>
 
-        {% for categorie in categories %}
+                <table class="table-striped table-bordered table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Catégorie</th>
+                            <th>Supprimer</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for categorie in categories %}
+                        <tr>
+                            <td>{{ categorie }}</td>
+                            <td>
+                                <a class="btn btn-xs btn-danger" href="{{ path('category_remove', {'id' : categorie.id }) }}">
+                                    <i class="glyphicon glyphicon-remove"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
 
-            {{ categorie.name }}
+                </table>
 
-        {% endfor %}
-
-    </div>
+            </div>
+        </div>
+    </main>
 
 {% endblock %}
