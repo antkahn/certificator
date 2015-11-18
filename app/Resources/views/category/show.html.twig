@@ -26,6 +26,9 @@
                     <th>
                         Intitulé
                     </th>
+                    <th>
+                        Modifier
+                    </th>
                 </tr>
             </thead>
 
@@ -34,6 +37,11 @@
                     <tr>
                         <td>
                             {{ question.statement }}
+                        </td>
+                        <td>
+                            <a href="{{ path('question_edit', {'id' : question.id}) }}" class="btn btn-xs btn-primary">
+                                <i class="glyphicon glyphicon-wrench"></i>
+                            </a>
                         </td>
                     </tr>
                 {% endfor %}
