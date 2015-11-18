@@ -38,7 +38,6 @@ class Answer
      * @ORM\JoinColumn(name="question_id", referencedColumnName="id")
      */
     private $question;
-    
 
     /**
      * @return integer

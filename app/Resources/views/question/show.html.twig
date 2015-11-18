@@ -9,15 +9,15 @@
             Revenir à la page d'accueil
         </a>
         <br>
-        <a href="{{ path('category_list') }}" class="label label-info">
+        <a href="{{ path('category_show', {'id' : question.category.id }) }}" class="label label-info">
             <i class="glyphicon glyphicon-chevron-left"></i>
-            Revenir à la liste des catégories
+            Revenir à la catégorie
         </a>
 
-        <h1>{{ category.name }}</h1>
+        <h1>{{ question.statement }}</h1>
 
-        <a class="alert alert-success col-md-12" href="{{ path('question_add', { 'id' : category.id }) }}">
-            <i class="glyphicon glyphicon-plus"></i>&nbsp;Ajouter une question
+        <a href="{{ path('answer_add', {'id' : question.id }) }}" class="alert alert-info col-md-12">
+            <i class="glyphicon glyphicon-plus"></i>&nbsp;Ajouter une réponse
         </a>
 
         <table class="table-striped table-bordered table table-hover">
@@ -27,34 +27,34 @@
                         Intitulé
                     </th>
                     <th>
-                        Réponses
+                        Véracité
                     </th>
                     <th>
                         Modifier
                     </th>
                 </tr>
             </thead>
-
             <tbody>
-                {% for question in questions %}
+                {% for answer in question.answers %}
                     <tr>
                         <td>
-                            {{ question.statement }}
+                            {{ answer.statement }}
                         </td>
                         <td>
-                            <a href="{{ path('question_show', {'id' : question.id}) }}" class="btn btn-xs btn-success">
-                                <i class="glyphicon glyphicon-eye-open"></i>
-                            </a>
+                            {% if answer.veracity %}
+                                <span class="label label-success">Vrai</span>
+                            {% else %}
+                                <span class="label label-danger">Faux</span>
+                            {% endif %}
                         </td>
                         <td>
-                            <a href="{{ path('question_edit', {'id' : question.id}) }}" class="btn btn-xs btn-primary">
+                            <a href="{{ path('answer_edit', {'id' : answer.id }) }}" class="btn btn-xs btn-primary">
                                 <i class="glyphicon glyphicon-wrench"></i>
                             </a>
                         </td>
                     </tr>
                 {% endfor %}
             </tbody>
-
         </table>
 
     </div>

@@ -11,9 +11,10 @@ class QuestionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('statement', 'text', array(
+            ->add('statement', 'text', [
                 'label' => 'Intitulé de la question'
-            ));
+            ])
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

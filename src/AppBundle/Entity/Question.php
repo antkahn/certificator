@@ -101,6 +101,7 @@ class Question
     public function addAnswer(Answer $answer)
     {
         $this->answers[] = $answer;
+        $answer->setQuestion($this);
 
         return $this;
     }

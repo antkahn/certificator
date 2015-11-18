@@ -9,15 +9,22 @@
             <i class="glyphicon glyphicon-chevron-left"></i>
             Revenir à la page d'accueil
         </a>
+        <br>
+        <a href="{{ path('question_show', {'id' : answer.question.id }) }}" class="label label-info">
+            <i class="glyphicon glyphicon-chevron-left"></i>
+            Revenir à la question
+        </a>
 
-        <h1>Modifier une question</h1>
+        <h1>Ajouter une réponse</h1>
 
         {{ form_start(form) }}
 
-        {{ form_row(form.statement) }}
+            {{ form_row(form.statement) }}
+            {{ form_row(form.veracity) }}
 
         <button class="btn btn-info" type="submit">Valider</button>
         {{ form_end(form) }}
+
 
     </div>
 

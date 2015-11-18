@@ -58,4 +58,13 @@ class QuestionController extends Controller
 
         return $this->render(':question:edit.html.twig', ['form' => $form->createView()]);
     }
+
+    /**
+     * @Route("/question/{id}/voir", name="question_show")
+     */
+    public function showAction(Question $question)
+    {
+
+        return $this->render(':question:show.html.twig', ['question' => $question]);
+    }
 }
