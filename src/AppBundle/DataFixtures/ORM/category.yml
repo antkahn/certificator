@@ -1,0 +1,3 @@
+AppBundle\Entity\Category:
+    category{1..10}:
+        name: <word()>

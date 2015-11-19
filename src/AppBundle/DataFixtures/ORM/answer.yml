@@ -1,0 +1,201 @@
+AppBundle\Entity\Answer:
+    answer{1..5}:
+        statement: <word()>
+        veracity: <numberBetween(0, 1)>
+        question: @question1
+    answer{6..10}:
+        statement: <word()>
+        veracity: <numberBetween(0, 1)>
+        question: @question2
+    answer{11..15}:
+        statement: <word()>
+        veracity: <numberBetween(0, 1)>
+        question: @question3
+    answer{16..20}:
+        statement: <word()>
+        veracity: <numberBetween(0, 1)>
+        question: @question4
+    answer{21..25}:
+        statement: <word()>
+        veracity: <numberBetween(0, 1)>
+        question: @question5
+    answer{26..30}:
+        statement: <word()>
+        veracity: <numberBetween(0, 1)>
+        question: @question6
+    answer{31..35}:
+        statement: <word()>
+        veracity: <numberBetween(0, 1)>
+        question: @question7
+    answer{36..40}:
+        statement: <word()>
+        veracity: <numberBetween(0, 1)>
+        question: @question8
+    answer{41..45}:
+        statement: <word()>
+        veracity: <numberBetween(0, 1)>
+        question: @question9
+    answer{46..50}:
+        statement: <word()>
+        veracity: <numberBetween(0, 1)>
+        question: @question10
+    answer{51..55}:
+        statement: <word()>
+        veracity: <numberBetween(0, 1)>
+        question: @question11
+    answer{56..60}:
+        statement: <word()>
+        veracity: <numberBetween(0, 1)>
+        question: @question12
+    answer{61..65}:
+        statement: <word()>
+        veracity: <numberBetween(0, 1)>
+        question: @question13
+    answer{66..70}:
+        statement: <word()>
+        veracity: <numberBetween(0, 1)>
+        question: @question14
+    answer{71..75}:
+        statement: <word()>
+        veracity: <numberBetween(0, 1)>
+        question: @question15
+    answer{76..80}:
+        statement: <word()>
+        veracity: <numberBetween(0, 1)>
+        question: @question16
+    answer{81..85}:
+        statement: <word()>
+        veracity: <numberBetween(0, 1)>
+        question: @question17
+    answer{86..90}:
+        statement: <word()>
+        veracity: <numberBetween(0, 1)>
+        question: @question18
+    answer{91..95}:
+        statement: <word()>
+        veracity: <numberBetween(0, 1)>
+        question: @question19
+    answer{96..100}:
+        statement: <word()>
+        veracity: <numberBetween(0, 1)>
+        question: @question20
+    answer{101..105}:
+        statement: <word()>
+        veracity: <numberBetween(0, 1)>
+        question: @question21
+    answer{106..110}:
+        statement: <word()>
+        veracity: <numberBetween(0, 1)>
+        question: @question22
+    answer{111..115}:
+        statement: <word()>
+        veracity: <numberBetween(0, 1)>
+        question: @question23
+    answer{116..120}:
+        statement: <word()>
+        veracity: <numberBetween(0, 1)>
+        question: @question24
+    answer{121..125}:
+        statement: <word()>
+        veracity: <numberBetween(0, 1)>
+        question: @question25
+    answer{126..130}:
+        statement: <word()>
+        veracity: <numberBetween(0, 1)>
+        question: @question26
+    answer{131..135}:
+        statement: <word()>
+        veracity: <numberBetween(0, 1)>
+        question: @question27
+    answer{136..140}:
+        statement: <word()>
+        veracity: <numberBetween(0, 1)>
+        question: @question28
+    answer{141..145}:
+        statement: <word()>
+        veracity: <numberBetween(0, 1)>
+        question: @question29
+    answer{146..150}:
+        statement: <word()>
+        veracity: <numberBetween(0, 1)>
+        question: @question30
+    answer{151..155}:
+        statement: <word()>
+        veracity: <numberBetween(0, 1)>
+        question: @question31
+    answer{156..160}:
+        statement: <word()>
+        veracity: <numberBetween(0, 1)>
+        question: @question32
+    answer{161..165}:
+        statement: <word()>
+        veracity: <numberBetween(0, 1)>
+        question: @question33
+    answer{166..170}:
+        statement: <word()>
+        veracity: <numberBetween(0, 1)>
+        question: @question34
+    answer{171..175}:
+        statement: <word()>
+        veracity: <numberBetween(0, 1)>
+        question: @question35
+    answer{176..180}:
+        statement: <word()>
+        veracity: <numberBetween(0, 1)>
+        question: @question36
+    answer{181..185}:
+        statement: <word()>
+        veracity: <numberBetween(0, 1)>
+        question: @question37
+    answer{186..190}:
+        statement: <word()>
+        veracity: <numberBetween(0, 1)>
+        question: @question38
+    answer{191..195}:
+        statement: <word()>
+        veracity: <numberBetween(0, 1)>
+        question: @question39
+    answer{196..200}:
+        statement: <word()>
+        veracity: <numberBetween(0, 1)>
+        question: @question40
+    answer{201..205}:
+        statement: <word()>
+        veracity: <numberBetween(0, 1)>
+        question: @question41
+    answer{206..210}:
+        statement: <word()>
+        veracity: <numberBetween(0, 1)>
+        question: @question42
+    answer{211..215}:
+        statement: <word()>
+        veracity: <numberBetween(0, 1)>
+        question: @question43
+    answer{216..220}:
+        statement: <word()>
+        veracity: <numberBetween(0, 1)>
+        question: @question44
+    answer{221..225}:
+        statement: <word()>
+        veracity: <numberBetween(0, 1)>
+        question: @question45
+    answer{226..230}:
+        statement: <word()>
+        veracity: <numberBetween(0, 1)>
+        question: @question46
+    answer{231..235}:
+        statement: <word()>
+        veracity: <numberBetween(0, 1)>
+        question: @question47
+    answer{236..240}:
+        statement: <word()>
+        veracity: <numberBetween(0, 1)>
+        question: @question48
+    answer{241..245}:
+        statement: <word()>
+        veracity: <numberBetween(0, 1)>
+        question: @question49
+    answer{246..250}:
+        statement: <word()>
+        veracity: <numberBetween(0, 1)>
+        question: @question50

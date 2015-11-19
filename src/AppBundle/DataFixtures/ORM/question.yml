@@ -1,0 +1,31 @@
+AppBundle\Entity\Question:
+    question{1..5}:
+        statement: <sentence()>
+        category: @category1
+    question{6..10}:
+        statement: <sentence()>
+        category: @category2
+    question{11..15}:
+        statement: <sentence()>
+        category: @category3
+    question{16..20}:
+        statement: <sentence()>
+        category: @category4
+    question{21..25}:
+        statement: <sentence()>
+        category: @category5
+    question{26..30}:
+        statement: <sentence()>
+        category: @category6
+    question{31..35}:
+        statement: <sentence()>
+        category: @category7
+    question{36..40}:
+        statement: <sentence()>
+        category: @category8
+    question{41..45}:
+        statement: <sentence()>
+        category: @category9
+    question{46..50}:
+        statement: <sentence()>
+        category: @category10
