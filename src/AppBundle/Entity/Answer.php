@@ -39,6 +39,11 @@ class Answer
      */
     private $question;
 
+    public function __toString()
+    {
+        return $this->statement;
+    }
+
     /**
      * @return integer
      */

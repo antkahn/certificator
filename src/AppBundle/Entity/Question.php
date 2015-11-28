@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Table()
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\QuestionRepository")
  */
 class Question
 {
@@ -43,6 +43,11 @@ class Question
     public function __construct()
     {
         $this->answers = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return $this->statement;
     }
 
     /**
