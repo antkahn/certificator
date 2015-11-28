@@ -45,6 +45,14 @@ class Answer
     }
 
     /**
+     * @return bool
+     */
+    public function isTrue()
+    {
+        return $this->veracity;
+    }
+
+    /**
      * @return integer
      */
     public function getId()

@@ -56,9 +56,17 @@ class QuizController extends Controller
             $em->persist($quizEntity);
             $em->flush();
 
-            return $this->redirectToRoute('homepage');
+            return $this->redirectToRoute('quiz_correct', ['id' => $quizEntity->getId()]);
         }
 
         return $this->render(':quiz:take.html.twig', ['form' => $form->createView()]);
+    }
+
+    /**
+     * @Route("/quiz/{id}/correction", name="quiz_correct")
+     */
+    public function correctAction(Request $request, \AppBundle\Entity\Quiz $quiz)
+    {
+        return $this->render(':quiz:correct.html.twig', ['quiz' => $quiz]);
     }
 }
