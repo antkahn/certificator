@@ -1,0 +1,20 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+
+    <div class="container">
+        <h1>Bienvenue {{ user.username }} !</h1>
+
+        <hr>
+
+        <div class="row">
+            <a class="alert alert-info col-md-12" href="{{ path('homepage') }}">
+                <i class="glyphicon glyphicon-chevron-right"></i>&nbsp;Page d'accueil
+            </a>
+            <a class="alert alert-info col-md-12" href="{{ path('quiz_take') }}">
+                <i class="glyphicon glyphicon-chevron-right"></i>&nbsp;Quiz
+            </a>
+        </div>
+    </div>
+
+{% endblock %}

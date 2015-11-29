@@ -48,6 +48,7 @@ class QuizController extends Controller
             $answersGiven = $quiz->getAnswers();
 
             $quizEntity = new \AppBundle\Entity\Quiz();
+            $quizEntity->setUser($this->getUser());
 
             foreach ($answersGiven as $ans) {
                 $quizEntity->addAnswer($answerRepository->findOneBy(['id' => $ans->getId()]));

@@ -29,6 +29,12 @@ class Quiz
      */
     private $answers;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="quizzes")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $user;
+
     public function __construct()
     {
         $this->answers = new ArrayCollection();
@@ -68,5 +74,25 @@ class Quiz
     public function getAnswers()
     {
         return $this->answers;
+    }
+
+    /**
+     * @param User $user
+     *
+     * @return Quiz
+     */
+    public function setUser(User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @return User
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }
