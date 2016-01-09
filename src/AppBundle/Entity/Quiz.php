@@ -35,9 +35,10 @@ class Quiz
      */
     private $user;
 
-    public function __construct()
+    public function __construct(User $user)
     {
         $this->answers = new ArrayCollection();
+        $this->user = $user;
     }
 
     /**

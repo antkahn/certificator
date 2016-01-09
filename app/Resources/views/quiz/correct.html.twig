@@ -11,6 +11,10 @@
 
         <h1>Correction</h1>
 
+        <br>
+        Vous avez <span class="label label-danger">{{ badAnswersCount }}</span> mauvaises réponses et
+        <span class="label label-success">{{ goodAnswersCount }}</span> bonnes réponses.
+
         {% for answer in quiz.answers %}
             <hr>
             <div><strong>Question : </strong>{{ answer.question }}</div>

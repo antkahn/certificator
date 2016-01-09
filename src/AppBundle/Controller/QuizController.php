@@ -17,25 +17,20 @@ class QuizController extends Controller
      */
     public function takeAction(Request $request)
     {
-        $qs = $this->getDoctrine()->getRepository('AppBundle:Question')->getRandomQuestions(10);
+        /** @var \AppBundle\Entity\Question[] $randomQuestions */
+        $randomQuestions = $this->getDoctrine()->getRepository('AppBundle:Question')->getRandomQuestions(10);
 
-        $questions = [];
+        $quizQuestions = array_map(function($question) {
 
-        foreach ($qs as $q) {
-            $question = new Question($q);
+            $answers = array_map(function($answer) {
 
-            $answers = [];
+                return new Answer($answer);
+            }, $question->getAnswers()->toArray());
 
-            foreach ($q->getAnswers() as $a) {
-                $answers[] = new Answer($a);
-            }
+            return new Question($question, $answers);
+        }, $randomQuestions);
 
-            $question->setAnswers($answers);
-
-            $questions[] = $question;
-        }
-
-        $quiz = new Quiz($questions);
+        $quiz = new Quiz($quizQuestions);
 
         $form = $this->createForm(new QuizType(), $quiz);
         $form->handleRequest($request);
@@ -47,8 +42,7 @@ class QuizController extends Controller
 
             $answersGiven = $quiz->getAnswers();
 
-            $quizEntity = new \AppBundle\Entity\Quiz();
-            $quizEntity->setUser($this->getUser());
+            $quizEntity = new \AppBundle\Entity\Quiz($this->getUser());
 
             foreach ($answersGiven as $ans) {
                 $quizEntity->addAnswer($answerRepository->findOneBy(['id' => $ans->getId()]));
@@ -68,6 +62,24 @@ class QuizController extends Controller
      */
     public function correctAction(Request $request, \AppBundle\Entity\Quiz $quiz)
     {
-        return $this->render(':quiz:correct.html.twig', ['quiz' => $quiz]);
+        if ($this->getUser() !== $quiz->getUser()) {
+            return $this->createNotFoundException('Quiz not found');
+        }
+
+        $goodAnswers = array_filter($quiz->getAnswers()->toArray(), function($answer) {
+            return $answer->isTrue();
+        });
+
+        $badAnswers = array_filter($quiz->getAnswers()->toArray(), function($answer) {
+            return !$answer->isTrue();
+        });
+
+        return $this->render(':quiz:correct.html.twig',
+            [
+                'quiz' => $quiz,
+                'goodAnswersCount' => count($goodAnswers),
+                'badAnswersCount' => count($badAnswers),
+            ]
+        );
     }
 }

@@ -14,9 +14,10 @@ class Question
      */
     private $statement;
 
-    public function __construct(\AppBundle\Entity\Question $question)
+    public function __construct(\AppBundle\Entity\Question $question, $answers)
     {
         $this->statement = $question->getStatement();
+        $this->answers = $answers;
     }
 
     /**
