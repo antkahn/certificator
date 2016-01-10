@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="container">
+
+        <a href="{{ path('homepage') }}" class="label label-info">
+            <i class="glyphicon glyphicon-chevron-left"></i>
+            Revenir à la page d'accueil
+        </a>
+
+        <h1>Mon profil</h1>
+        <hr>
+
+        <h2>Mes résultats</h2>
+
+        <table class="table-striped table-bordered table table-hover">
+            <thead>
+            <tr>
+                <th class="text-center">
+                    Bonnes réponses
+                </th>
+                <th class="text-center">
+                    Mauvaises réponses
+                </th>
+                <th class="text-center">
+                    Voir le détail
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for quiz in app.user.quizzes %}
+                <tr>
+                    <td class="success text-center">
+                        <span class="label label-success">{{ quiz.goodAnswersCount }}</span>
+                    </td>
+                    <td class="danger text-center">
+                        <span class="label label-danger">{{ quiz.badAnswersCount }}</span>
+                    </td>
+                    <td class="text-center">
+                        <a href="{{ path('quiz_correct', {'id': quiz.id}) }}"><i class="glyphicon glyphicon-share"></i></a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <h2>Mes informations</h2>
+
+        <label>Mon pseudo :</label> {{ app.user.username }}
+        <br>
+        <label>Mon email :</label> {{ app.user.email }}
+        <br>
+        <a href="{{ path('fos_user_profile_edit') }}">Modifier mes informations</a>
+
+    </div>
+
+{% endblock %}

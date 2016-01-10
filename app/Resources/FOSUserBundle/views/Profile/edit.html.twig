@@ -1,0 +1,25 @@
+{% extends '::base.html.twig' %}
+
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+
+{% block body %}
+
+    <div class="container">
+
+        <a href="{{ path('fos_user_profile_show') }}" class="label label-info">
+            <i class="glyphicon glyphicon-chevron-left"></i>
+            Revenir au profil
+        </a>
+
+        <h1>Modifier mon profil</h1>
+
+        {{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}
+            {{ form_widget(form) }}
+        <div>
+            <input class="btn btn-info btn-lg" type="submit" value="{{ 'Valider' }}" />
+        </div>
+        {{ form_end(form) }}
+
+    </div>
+
+{% endblock %}

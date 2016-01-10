@@ -96,4 +96,36 @@ class Quiz
     {
         return $this->user;
     }
+
+    /**
+     * @return array
+     */
+    public function getGoodAnswers() {
+        return array_filter($this->answers->toArray(), function($answer) {
+            return $answer->isTrue();
+        });
+    }
+
+    /**
+     * @return int
+     */
+    public function getGoodAnswersCount() {
+        return count($this->getGoodAnswers());
+    }
+
+    /**
+     * @return array
+     */
+    public function getBadAnswers() {
+        return array_filter($this->answers->toArray(), function($answer) {
+            return !$answer->isTrue();
+        });
+    }
+
+    /**
+     * @return int
+     */
+    public function getBadAnswersCount() {
+        return count($this->getBadAnswers());
+    }
 }

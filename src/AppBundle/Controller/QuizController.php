@@ -66,19 +66,11 @@ class QuizController extends Controller
             return $this->createNotFoundException('Quiz not found');
         }
 
-        $goodAnswers = array_filter($quiz->getAnswers()->toArray(), function($answer) {
-            return $answer->isTrue();
-        });
-
-        $badAnswers = array_filter($quiz->getAnswers()->toArray(), function($answer) {
-            return !$answer->isTrue();
-        });
-
         return $this->render(':quiz:correct.html.twig',
             [
                 'quiz' => $quiz,
-                'goodAnswersCount' => count($goodAnswers),
-                'badAnswersCount' => count($badAnswers),
+                'goodAnswersCount' => $quiz->getGoodAnswersCount(),
+                'badAnswersCount' => $quiz->getBadAnswersCount(),
             ]
         );
     }
