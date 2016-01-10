@@ -29,6 +29,19 @@
             </div>
         {% endfor %}
 
+        <br>
+
+        <a href="{{ path('quiz_take') }}" class="btn btn-info">
+            <i class="glyphicon glyphicon-chevron-right"></i>
+            Autre quiz
+        </a>
+
+        <a href="{{ path('fos_user_profile_show') }}" class="btn btn-info">
+            <i class="glyphicon glyphicon-chevron-right"></i>
+            Mon profil
+        </a>
+
+
     </div>
 
 {% endblock %}

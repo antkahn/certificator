@@ -18,6 +18,9 @@
             <thead>
             <tr>
                 <th class="text-center">
+                    Date
+                </th>
+                <th class="text-center">
                     Bonnes réponses
                 </th>
                 <th class="text-center">
@@ -31,6 +34,9 @@
             <tbody>
             {% for quiz in app.user.quizzes %}
                 <tr>
+                    <td class="text-center">
+                        {{ quiz.createdAt | date('d/m/Y H:i') }}
+                    </td>
                     <td class="success text-center">
                         <span class="label label-success">{{ quiz.goodAnswersCount }}</span>
                     </td>
@@ -44,6 +50,8 @@
             {% endfor %}
             </tbody>
         </table>
+
+        <hr>
 
         <h2>Mes informations</h2>
 

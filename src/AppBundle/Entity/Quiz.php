@@ -35,10 +35,16 @@ class Quiz
      */
     private $user;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $createdAt;
+
     public function __construct(User $user)
     {
         $this->answers = new ArrayCollection();
         $this->user = $user;
+        $this->createdAt = new \DateTime('now');
     }
 
     /**
@@ -127,5 +133,25 @@ class Quiz
      */
     public function getBadAnswersCount() {
         return count($this->getBadAnswers());
+    }
+
+    /**
+     * @param \DateTime $createdAt
+     *
+     * @return Quiz
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
     }
 }
