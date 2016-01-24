@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+
+{% block body %}
+
+    <div class="container">
+
+        <a href="{{ path('homepage') }}" class="label label-info">
+            <i class="glyphicon glyphicon-chevron-left"></i>
+            Revenir à la page d'accueil
+        </a>
+
+        <h1>Configurer mon quiz</h1>
+        <hr>
+
+        {{ form_start(form) }}
+
+        {{ form_row(form.category) }}
+        {{ form_row(form.questionAmount) }}
+
+        <hr>
+        <button class="btn btn-lg btn-success" type="submit">Valider ma configuration</button>
+        {{ form_end(form) }}
+
+    </div>
+
+{% endblock %}

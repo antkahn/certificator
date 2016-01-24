@@ -12,9 +12,11 @@ class QuestionRepository extends EntityRepository
      *
      * @return Question[]
      */
-    public function getRandomQuestions($count = 10)
+    public function getRandomQuestions($category, $count = 10)
     {
         return  $this->createQueryBuilder('q')
+            ->andWhere('q.category = :category')
+            ->setParameter('category', $category)
             ->addSelect('RAND() as HIDDEN rand')
             ->addOrderBy('rand')
             ->setMaxResults($count)

@@ -2,10 +2,13 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Category;
+use AppBundle\Form\QuizConfigurationType;
 use AppBundle\Form\QuizType;
 use AppBundle\Model\Answer;
 use AppBundle\Model\Question;
 use AppBundle\Model\Quiz;
+use AppBundle\Model\QuizConfiguration;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,12 +16,35 @@ use Symfony\Component\HttpFoundation\Request;
 class QuizController extends Controller
 {
     /**
-     * @Route("/quiz", name="quiz_take")
+     * @Route("/quiz", name="quiz_configure")
      */
-    public function takeAction(Request $request)
+    public function configureAction(Request $request)
+    {
+        $quizConfiguration = new QuizConfiguration();
+
+        $form = $this->createForm(new QuizConfigurationType(), $quizConfiguration);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            return $this->redirectToRoute('quiz_take',
+                [
+                    'id' => $quizConfiguration->getCategory()->getId(),
+                    'questionAmount' => $quizConfiguration->getQuestionAmount() ?: 10,
+                ]
+            );
+        }
+
+        return $this->render(':quiz:configuration.html.twig', [ 'form' => $form->createView()]);
+    }
+
+    /**
+     * @Route("/quiz/categorie/{id}/questions/{questionAmount}", name="quiz_take")
+     */
+    public function takeAction(Request $request, Category $category, $questionAmount)
     {
         /** @var \AppBundle\Entity\Question[] $randomQuestions */
-        $randomQuestions = $this->getDoctrine()->getRepository('AppBundle:Question')->getRandomQuestions(10);
+        $randomQuestions = $this->getDoctrine()->getRepository('AppBundle:Question')->getRandomQuestions($category, $questionAmount);
 
         $quizQuestions = array_map(function($question) {
 
@@ -35,7 +61,7 @@ class QuizController extends Controller
         $form = $this->createForm(new QuizType(), $quiz);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted()) {
+        if ($form->isSubmitted() && $form->isValid()) {
 
             $em = $this->getDoctrine()->getEntityManager();
             $answerRepository = $em->getRepository('AppBundle:Answer');
