@@ -10,17 +10,21 @@
             Revenir à la page d'accueil
         </a>
 
-        <h1>Configurer mon quiz</h1>
-        <hr>
+        <h2>Configurer mon quiz</h2>
 
         {{ form_start(form) }}
 
         {{ form_row(form.category) }}
         {{ form_row(form.questionAmount) }}
 
-        <hr>
         <button class="btn btn-lg btn-success" type="submit">Valider ma configuration</button>
         {{ form_end(form) }}
+
+        <hr>
+
+        <h2>All random</h2>
+
+        <a class="btn btn-lg btn-danger" href="{{ path('quiz_random') }}">Test me !</a>
 
     </div>
 

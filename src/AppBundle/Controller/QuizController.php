@@ -39,13 +39,33 @@ class QuizController extends Controller
     }
 
     /**
+     * @Route("/quiz/random", name="quiz_random")
+     */
+    public function randomAction(Request $request) {
+        /** @var \AppBundle\Entity\Question[] $randomQuestions */
+        $randomQuestions = $this->getDoctrine()->getRepository('AppBundle:Question')->getRandomQuestions();
+
+        return $this->takeQuiz($request, $randomQuestions);
+    }
+
+    /**
      * @Route("/quiz/categorie/{id}/questions/{questionAmount}", name="quiz_take")
      */
     public function takeAction(Request $request, Category $category, $questionAmount)
     {
         /** @var \AppBundle\Entity\Question[] $randomQuestions */
-        $randomQuestions = $this->getDoctrine()->getRepository('AppBundle:Question')->getRandomQuestions($category, $questionAmount);
+        $randomQuestions = $this->getDoctrine()->getRepository('AppBundle:Question')->getRandomQuestionsByCategory($category, $questionAmount);
 
+        return $this->takeQuiz($request, $randomQuestions);
+    }
+
+    /**
+     * @param Request $request
+     * @param \AppBundle\Entity\Question[] $randomQuestions
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    private function takeQuiz(Request $request, $randomQuestions) {
         $quizQuestions = array_map(function($question) {
 
             $answers = array_map(function($answer) {
@@ -70,8 +90,8 @@ class QuizController extends Controller
 
             $quizEntity = new \AppBundle\Entity\Quiz($this->getUser());
 
-            foreach ($answersGiven as $ans) {
-                $quizEntity->addAnswer($answerRepository->findOneBy(['id' => $ans->getId()]));
+            foreach ($answersGiven as $answer) {
+                $quizEntity->addAnswer($answerRepository->findOneBy(['id' => $answer->getId()]));
             }
 
             $em->persist($quizEntity);
