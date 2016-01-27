@@ -1,0 +1,78 @@
+category: HTTP
+questions:
+    -
+        question: 'Which of these HTTP headers does not exist?'
+        answers:
+            - {value: Control-Cache,  correct: true}
+            - {value: Cache-Modifier, correct: true}
+            - {value: Expires,        correct: false}
+            - {value: Last-Modified,  correct: false}
+            - {value: Cache-Control,  correct: false}
+    -
+        question: 'Which one of these Response methods check if cache must be revalidated?'
+        answers:
+            - {value: $response->mustRevalidate(),    correct: true}
+            - {value: $response->isRevalidated(),     correct: false}
+            - {value: $response->getRevalidated(),    correct: false}
+            - {value: $response->mustBeRevalidated(), correct: false}
+    -
+        question: 'Using a Response instance, which of these methods are available to check status code?'
+        answers:
+            - {value: $response->isInformational(), correct: true}
+            - {value: $response->isSuccessful(),    correct: true}
+            - {value: $response->isRedirection(),   correct: true}
+            - {value: $response->isInvalid(),       correct: true}
+            - {value: $response->isError(),         correct: false}
+    -
+        question: 'How to access the `foo` GET parameter from Request object $request ?'
+        answers:
+            - {value: "$request->query->get('foo');",     correct: true}
+            - {value: "$request->request->get('foo');",   correct: false}
+            - {value: "{$request->query->all()}['foo'];", correct: true}
+            - {value: "$request->get('foo');",            correct: false}
+    -
+        question: 'How to access the `bar` POST parameter from Request object $request ?'
+        answers:
+            - {value: "$request->query->get('bar');",     correct: false}
+            - {value: "$request->request->get('bar');",   correct: true}
+            - {value: "{$request->query->all()}['baz'];", correct: false}
+            - {value: "$request->post('bar');",           correct: false}
+    -
+        question: 'The method getLanguages() from Request object:'
+        answers:
+            - {value: 'return the value of the metadata lang',                   correct: false}
+            - {value: 'return an array of languages available in translations',  correct: false}
+            - {value: 'return an array of languages the client accepts',         correct: true}
+            - {value: 'does not exists',                                         correct: false}
+    -
+        question: 'How to get the Content Type from Request ?'
+        answers:
+            - {value: "$request->headers->get('content_type');", correct: true}
+            - {value: "$request->headers->get('content-type');", correct: true}
+            - {value: "$request->headers->get('Content-Type');", correct: true}
+            - {value: "$request->getContentType();",             correct: true}
+    -
+        question: 'How to check if a request have been sent using AJAX ?'
+        answers:
+            - {value: $request->isXmlHttpRequest();,                                   correct: true}
+            - {value: $request->isAJAX();,                                             correct: false}
+            - {value: "$this->headers->get('X-Requested-With') === 'XMLHttpRequest';", correct: true}
+    -
+        question: 'Theses Response subclasses are available: true or false ?'
+        answers:
+            - {value: JsonResponse,       correct: true}
+            - {value: StreamResponse,     correct: false}
+            - {value: BinaryFileResponse, correct: true}
+            - {value: XmlResponse,        correct: false}
+    -
+        question: 'Which HTTP status code should for a resource that moved temporarily ?'
+        answers:
+            - {value: 301, correct: false}
+            - {value: 302, correct: true}
+            - {value: 201, correct: false}
+            - {value: 204, correct: false}
+    -
+        question: 'True or False ? Server returns an 403 HTTP status code when you are not allowed to access a resource'
+        answers:
+            - {value: "True",    correct: true}
+            - {value: "False",   correct: false}
