@@ -8,6 +8,7 @@ use AppBundle\Form\CategoryType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class CategoryController extends Controller
 {
@@ -79,8 +80,12 @@ class CategoryController extends Controller
     {
         $em = $this->getDoctrine()->getEntityManager();
 
-        $em->remove($category);
-        $em->flush();
+        try {
+            $em->remove($category);
+            $em->flush();
+        } catch (\Exception $e) {
+            return new Response('Suppression impossible !');
+        }
 
         return $this->redirect($this->generateUrl('category_list'));
     }
