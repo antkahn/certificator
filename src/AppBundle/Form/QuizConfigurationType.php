@@ -19,6 +19,7 @@ class QuizConfigurationType extends AbstractType
             ])
             ->add('questionAmount', 'integer', [
                 'label' => 'Nombre de questions maximum',
+                'data' => 10,
                 'required' => false,
             ])
         ;
