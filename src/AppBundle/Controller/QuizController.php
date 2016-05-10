@@ -90,8 +90,10 @@ class QuizController extends Controller
 
             $quizEntity = new \AppBundle\Entity\Quiz($this->getUser());
 
-            foreach ($answersGiven as $answer) {
-                $quizEntity->addAnswer($answerRepository->findOneBy(['id' => $answer->getId()]));
+            foreach ($answersGiven as $answers) {
+                foreach ($answers as $answer) {
+                    $quizEntity->addAnswer($answerRepository->findOneBy(['id' => $answer->getId()]));
+                }
             }
 
             $em->persist($quizEntity);
@@ -106,17 +108,44 @@ class QuizController extends Controller
     /**
      * @Route("/quiz/{id}/correction", name="quiz_correct")
      */
-    public function correctAction(Request $request, \AppBundle\Entity\Quiz $quiz)
+    public function correctAction(\AppBundle\Entity\Quiz $quiz)
     {
         if ($this->getUser() !== $quiz->getUser()) {
             return $this->createNotFoundException('Quiz not found');
         }
 
+        $questions = [];
+
+        /** @var \AppBundle\Entity\Answer $answer */
+        foreach ($quiz->getAnswers() as $answer) {
+            $question = $answer->getQuestion();
+
+            if (array_key_exists($question->getId(), $questions)) {
+                $questions[$question->getId()]['givenAnswers'][] = $answer;
+            }
+            else {
+                $questions[$question->getId()] = [
+                    'rightAnswers' => array_filter($question->getAnswers()->toArray(), function($answer) {
+                        return $answer->isTrue();
+                    }),
+                    'givenAnswers' => [ $answer ],
+                    'statement' => $question->getStatement(),
+                ];
+            }
+        }
+
+        foreach ($questions as $id => $question) {
+            $question['rightButNotGivenAnswers'] = array_diff(
+                $question['rightAnswers'],
+                $question['givenAnswers']
+            );
+            $questions[$id] = $question;
+        }
+
         return $this->render(':quiz:correct.html.twig',
             [
+                'questions' => $questions,
                 'quiz' => $quiz,
-                'goodAnswersCount' => $quiz->getGoodAnswersCount(),
-                'badAnswersCount' => $quiz->getBadAnswersCount(),
             ]
         );
     }

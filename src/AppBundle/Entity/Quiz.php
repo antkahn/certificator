@@ -120,6 +120,31 @@ class Quiz
     }
 
     /**
+     * @return int
+     */
+    public function getExpectedGoodAnswersCount() {
+        $questions = [];
+        $count = 0;
+
+        foreach ($this->answers as $answer) {
+            $question = $answer->getQuestion();
+
+            if (in_array($question->getId(), $questions)) {
+                continue;
+            }
+
+            $questions[] = $question->getId();
+            $count += count(
+                array_filter($question->getAnswers()->toArray(), function($answer) {
+                    return $answer->isTrue();
+                })
+            );
+        }
+
+        return $count;
+    }
+
+    /**
      * @return array
      */
     public function getBadAnswers() {

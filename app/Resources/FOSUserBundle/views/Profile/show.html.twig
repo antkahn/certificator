@@ -24,6 +24,9 @@
                     Bonnes réponses
                 </th>
                 <th class="text-center">
+                    Bonnes réponses attendues
+                </th>
+                <th class="text-center">
                     Mauvaises réponses
                 </th>
                 <th class="text-center">
@@ -39,6 +42,9 @@
                     </td>
                     <td class="success text-center">
                         <span class="label label-success">{{ quiz.goodAnswersCount }}</span>
+                    </td>
+                    <td class="warning text-center">
+                        <span class="label label-warning">{{ quiz.expectedGoodAnswersCount }}</span>
                     </td>
                     <td class="danger text-center">
                         <span class="label label-danger">{{ quiz.badAnswersCount }}</span>

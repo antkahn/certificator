@@ -12,19 +12,33 @@
         <h1>Correction</h1>
 
         <br>
-        Vous avez <span class="label label-danger">{{ badAnswersCount }}</span> mauvaises réponses et
-        <span class="label label-success">{{ goodAnswersCount }}</span> bonnes réponses.
+        Vous avez <span class="label label-danger">{{ quiz.badAnswersCount }}</span> mauvaises réponses et
+        <span class="label label-success">{{ quiz.goodAnswersCount }}</span> bonnes réponses sur
+        <span class="label label-warning">{{ quiz.expectedGoodAnswersCount }}</span> bonnes réponses attendues.
 
-        {% for answer in quiz.answers %}
+        {% for question in questions %}
             <hr>
-            <div><strong>Question : </strong>{{ answer.question }}</div>
+            <div><strong>Question : </strong>{{ question.statement }}</div>
             <div>
-                <strong>Votre réponse : </strong>{{ answer }}
+                <strong>Vos réponses : </strong>
+                {% for answer in question.givenAnswers %}
+                    <br>
+                    {% if answer.true %}
+                        <i class="glyphicon glyphicon-ok text-success"></i>
+                    {% else %}
+                        <i class="glyphicon glyphicon-remove text-danger"></i>
+                    {% endif %}
+                    {{ answer }}
 
-                {% if answer.true %}
-                    <i class="glyphicon glyphicon-ok text-success"></i>
-                {% else %}
-                    <i class="glyphicon glyphicon-remove text-danger"></i>
+                {% endfor %}
+                <br>
+                {% if question.rightButNotGivenAnswers is not empty %}
+                    <strong>Les autres réponses attendues étaient : </strong>
+                    {% for answer in question.rightButNotGivenAnswers %}
+                        <br>
+                        <i class="glyphicon glyphicon-ok text-success"></i>
+                        {{ answer }}
+                    {% endfor %}
                 {% endif %}
             </div>
         {% endfor %}

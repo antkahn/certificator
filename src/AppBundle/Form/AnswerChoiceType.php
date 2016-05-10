@@ -26,10 +26,10 @@ class AnswerChoiceType extends AbstractType
                     'choices_as_values' => true,
                     'choice_label' => function($answer, $key, $index) {
                         /** @var Answer $answer */
-                        return strtoupper($answer->getStatement());
+                        return $answer->getStatement();
                     },
                     'expanded' => true,
-                    'multiple' => false,
+                    'multiple' => true,
                 ));
             })
         ;
