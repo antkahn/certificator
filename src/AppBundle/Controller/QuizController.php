@@ -42,10 +42,27 @@ class QuizController extends Controller
      * @Route("/quiz/random", name="quiz_random")
      */
     public function randomAction(Request $request) {
-        /** @var \AppBundle\Entity\Question[] $randomQuestions */
-        $randomQuestions = $this->getDoctrine()->getRepository('AppBundle:Question')->getRandomQuestions();
+        $session = $request->getSession();
+        $questions = [];
 
-        return $this->takeQuiz($request, $randomQuestions);
+        if ($session->get('questionIds') != null && $request->isMethod('POST')) {
+            $questionIds = $session->get('questionIds');
+
+            foreach ($questionIds as $id) {
+                $questions[] = $this->getDoctrine()->getRepository('AppBundle:Question')->findOneBy(['id' => $id]);
+            }
+        }
+        else {
+            $questions = $this->getDoctrine()->getRepository('AppBundle:Question')->getRandomQuestions();
+            $questionIds = [];
+            foreach ($questions as $question) {
+                $questionIds[] = $question->getId();
+            }
+            $session->set('questionIds', $questionIds);
+
+        }
+
+        return $this->takeQuiz($request, $questions);
     }
 
     /**
@@ -53,19 +70,38 @@ class QuizController extends Controller
      */
     public function takeAction(Request $request, Category $category, $questionAmount)
     {
-        /** @var \AppBundle\Entity\Question[] $randomQuestions */
-        $randomQuestions = $this->getDoctrine()->getRepository('AppBundle:Question')->getRandomQuestionsByCategory($category, $questionAmount);
+        $session = $request->getSession();
+        $questions = [];
 
-        return $this->takeQuiz($request, $randomQuestions);
+        if ($session->get('questionIds') != null && $request->isMethod('POST')) {
+            $questionIds = $session->get('questionIds');
+
+            foreach ($questionIds as $id) {
+                $questions[] = $this->getDoctrine()->getRepository('AppBundle:Question')->findOneBy(['id' => $id]);
+            }
+        }
+        else {
+            $questions = $this->getDoctrine()->getRepository('AppBundle:Question')->getRandomQuestionsByCategory($category, $questionAmount);
+            $questionIds = [];
+            foreach ($questions as $question) {
+                $questionIds[] = $question->getId();
+            }
+            $session->set('questionIds', $questionIds);
+
+        }
+
+        return $this->takeQuiz($request, $questions);
     }
 
     /**
      * @param Request $request
-     * @param \AppBundle\Entity\Question[] $randomQuestions
+     * @param \AppBundle\Entity\Question[] $questions
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    private function takeQuiz(Request $request, $randomQuestions) {
+    private function takeQuiz(Request $request, $questions) {
+        $session = $request->getSession();
+
         $quizQuestions = array_map(function($question) {
 
             $answers = array_map(function($answer) {
@@ -74,7 +110,7 @@ class QuizController extends Controller
             }, $question->getAnswers()->toArray());
 
             return new Question($question, $answers);
-        }, $randomQuestions);
+        }, $questions);
 
         $quiz = new Quiz($quizQuestions);
 
@@ -82,6 +118,7 @@ class QuizController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $session->remove('questionIds');
 
             $em = $this->getDoctrine()->getEntityManager();
             $answerRepository = $em->getRepository('AppBundle:Answer');
